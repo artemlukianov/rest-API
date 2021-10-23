@@ -15,6 +15,7 @@
         "symfony/yaml": "5.3.*"
     },
     "require-dev": {
+        "phpstan/phpstan": "^0.12.99"
     },
     "config": {
         "optimize-autoloader": true,
@@ -39,6 +40,8 @@
         "symfony/polyfill-php72": "*"
     },
     "scripts": {
+        "start": "php -S localhost:8080 -t public",
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon --memory-limit=-1",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
