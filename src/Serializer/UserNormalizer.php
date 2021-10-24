@@ -20,6 +20,7 @@ class UserNormalizer implements ContextAwareNormalizerInterface
      */
     public function normalize($data, string $format = null, array $context = []): mixed
     {
+
         $data = $this->normalizer->normalize($data, $format, $context);
         /** @phpstan-var array<string, mixed> $data */
         $data['email'] = $this->secureEmail($data['email'] ?? '');

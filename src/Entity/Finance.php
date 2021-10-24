@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -19,10 +20,10 @@ class Finance
     private int $id;
 
     /**
-     * @ORM\Column(type="string", length=255, options={"default": "0"})
+     * @ORM\Column(type="float", length=255, options={"default": 0})
      * @Groups("view")
      */
-    private string $balance = "0";
+    private int|float $balance = 0;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="finance")
@@ -35,15 +36,12 @@ class Finance
         $this->user = $user;
     }
 
-    /**
-     * @return string
-     */
-    public function getBalance(): string
+    public function getBalance(): float|int
     {
         return $this->balance;
     }
 
-    public function setBalance(string $balance): self
+    public function setBalance(float|int $balance): self
     {
         $this->balance = $balance;
         return $this;
@@ -58,5 +56,15 @@ class Finance
     {
         $this->user = $user;
         return $this;
+    }
+
+    public function addToBalance(int|float $amount): void
+    {
+        $this->balance = $this->balance + $amount;
+    }
+
+    public function chargeBalance(int|float $amount): void
+    {
+        $this->balance = $this->balance - $amount;
     }
 }
