@@ -44,8 +44,9 @@ class TransactionsHistory
      */
     protected \DateTime $createdAt;
 
-    public function __construct()
+    public function __construct(User $user)
     {
+        $this->sender = $user;
         $this->createdAt = new \DateTime();
     }
 

@@ -23,7 +23,7 @@ class Finance
      * @ORM\Column(type="float", length=255, options={"default": 0})
      * @Groups("view")
      */
-    private int|float $balance = 0;
+    private float $balance = 0;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="finance")
@@ -31,17 +31,23 @@ class Finance
      */
     private User $user;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected \DateTime $createdAt;
+
     public function __construct(User $user)
     {
         $this->user = $user;
+        $this->createdAt = new \DateTime();
     }
 
-    public function getBalance(): float|int
+    public function getBalance(): float
     {
         return $this->balance;
     }
 
-    public function setBalance(float|int $balance): self
+    public function setBalance(float $balance): self
     {
         $this->balance = $balance;
         return $this;
@@ -58,12 +64,12 @@ class Finance
         return $this;
     }
 
-    public function addToBalance(int|float $amount): void
+    public function addToBalance(float $amount): void
     {
         $this->balance = $this->balance + $amount;
     }
 
-    public function chargeBalance(int|float $amount): void
+    public function chargeBalance(float $amount): void
     {
         $this->balance = $this->balance - $amount;
     }

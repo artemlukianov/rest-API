@@ -34,9 +34,8 @@ final class FinanceService
         $recipientUser->getFinance()->addToBalance($form->getAmount());
         $user->getFinance()->chargeBalance($form->getAmount());
 
-        $transaction = (new TransactionsHistory())
+        $transaction = (new TransactionsHistory($user))
             ->setAmount($form->getAmount())
-            ->setSender($user)
             ->setRecipientUsername($recipientUser->getUsername());
 
         $this->em->persist($transaction);

@@ -59,6 +59,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $email;
 
     /**
+     * @ORM\Column(type="string", length=45, nullable=false)
+     * Hash need to easily logout user by add it to JWT payload and change hash when logout action executed
+     */
+    private string $hash;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Finance", mappedBy="user", cascade={"persist"})
      * @Groups("view")
      */
@@ -71,10 +77,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private Collection $transactionsHistory;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected \DateTime $createdAt;
+
     public function __construct()
     {
         $this->finance = new Finance($this);
         $this->transactionsHistory = new ArrayCollection();
+        $this->hash = uniqid();
+        $this->createdAt = new \DateTime();
+    }
+
+    public function getHash(): string
+    {
+        return $this->hash;
+    }
+
+    public function setHash(string $hash): self
+    {
+        $this->hash = $hash;
+        return $this;
     }
 
     /**

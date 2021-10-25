@@ -11,7 +11,6 @@ final class TransferFinanceForm
     /**
      * @Assert\NotBlank
      * @Assert\Type("string")
-     * @Assert\Length(min=8, max=255)]
      */
     private string $username = '';
 
@@ -21,7 +20,7 @@ final class TransferFinanceForm
      * @Assert\NotEqualTo(value=0)
      * @IsBalanceValid
      */
-    private int|float $amount = 0;
+    private float $amount = 0;
 
     public function getUsername(): ?string
     {
@@ -35,12 +34,12 @@ final class TransferFinanceForm
     }
 
 
-    public function getAmount(): int|float
+    public function getAmount(): float
     {
         return $this->amount;
     }
 
-    public function setAmount(int|float $amount): self
+    public function setAmount(float $amount): self
     {
         $this->amount = $amount;
         return $this;
