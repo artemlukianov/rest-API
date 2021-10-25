@@ -8,7 +8,7 @@ Docker, docker-compose
 
 ## Installation
 
-clone `https://github.com/artemlukianov/rest-API.git`
+clone `git clone https://github.com/artemlukianov/rest-API.git`
 
 init `./bin/init.sh`
 
